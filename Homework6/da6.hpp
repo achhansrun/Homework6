@@ -37,7 +37,7 @@ public:
 	std::unique_ptr<Node> head;
 
 public:
-	SlowMap() = default;
+	SlowMap() : head(nullptr) {}
 
 	~SlowMap() = default;
 
@@ -83,18 +83,28 @@ public:
 
 	void set(const KeyType& key, const DataType& value) {
 		Node* current = head.get();
+		Node* prev = nullptr;
+
 		while (current) {
 			if (current->data.first == key) {
 				current->data.second = value;
 				return;
 			}
+
+			prev = current;
 			current = current->next.get();
 		}
 
 		auto newNode = std::make_unique<Node>(std::make_pair(key, value));
-		newNode->next = std::move(head);
-		head = std::move(newNode);
+
+		if (prev) {
+			prev->next = std::move(newNode);
+		}
+		else {
+			head = std::move(newNode);
+		}
 	}
+
 
 	void erase(const KeyType& key) {
 		Node* current = head.get();
