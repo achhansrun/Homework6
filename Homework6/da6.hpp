@@ -41,7 +41,7 @@ public:
 
 	~SlowMap() = default;
 
-	 size_type size() const {
+	size_type size() const {
 		size_type count = 0;
 		Node* current = head.get();
 		while (current) {
@@ -134,4 +134,4 @@ public:
 			current = current->next.get();
 		}
 	}
-};;
+};

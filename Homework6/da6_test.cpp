@@ -846,6 +846,8 @@ TEST_CASE( "SlowMap: set, get, erase" )
         {
             m.erase(i);
         }
+		
+		auto n = m.size();
 
         {
             INFO( "Size is correct after erase" );
@@ -909,6 +911,7 @@ TEST_CASE( "SlowMap: set, get, erase" )
         }
         {
             INFO( "Size is correct after single erase" );
+			auto g = m.size();
             REQUIRE( m.size() == SIZE-1 );
         }
 
